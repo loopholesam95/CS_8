@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.subhadeep95.cs_8">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Class_Routine"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.default" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Faculty_Details"
+            android:label="@string/title_activity_faculty__details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Student_details"
+            android:label="@string/title_activity_student_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Latest_details"
+            android:label="@string/title_activity_latest_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Notice"
+            android:label="@string/title_activity_notice"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".COA" />
+        <activity android:name=".FLA" />
+        <activity android:name=".CN" />
+        <activity android:name=".DAA" />
+        <activity android:name=".SE"></activity>
+        <activity android:name=".splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
