@@ -33,11 +33,6 @@
             android:name=".Notice"
             android:label="@string/title_activity_notice"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".COA" />
-        <activity android:name=".FLA" />
-        <activity android:name=".CN" />
-        <activity android:name=".DAA" />
-        <activity android:name=".SE"></activity>
         <activity android:name=".splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

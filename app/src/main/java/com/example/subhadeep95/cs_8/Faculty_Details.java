@@ -16,11 +16,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Faculty_Details extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    String Name[] = {"Saurabh Bilgaiyan","Abhishek Ray","P.K.Panigrahi","Subhasis Dash","Arup Abhinna Acharya","P.K.Panigrahi","Abhishek Ray"};
+    String Email[] = {"saurabhbilgaiyan01@gmail.com",
+                      "arayfcs@kiit.ac.in",
+                      "prabinprakash1@gmail.com",
+                      "sdasfcs@kiit.ac.in",
+                      "aacharyafcs@kiit.ac.in",
+                      "prabinprakash1@gmail.com",
+                      "arayfcs@kiit.ac.in"
+                        };
+    String Phone[] = {"1112","1234","5678","5467","8907","4536","5555"};
+    int Image[] = {R.drawable.saurav,R.drawable.abhi,R.drawable.prabin,R.drawable.dash,R.drawable.arup,R.drawable.prabin,R.drawable.abhi};
+
+    TextView tName,tEmail,tPhone;
+    ImageView tPhoto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +46,11 @@ public class Faculty_Details extends AppCompatActivity
         setContentView(R.layout.activity_faculty__details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        tName = (TextView)findViewById(R.id.tName);
+        tEmail = (TextView)findViewById(R.id.tEmail);
+        tPhone = (TextView)findViewById(R.id.tPhone);
+        tPhoto = (ImageView)findViewById(R.id.tPhoto);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,39 +68,34 @@ public class Faculty_Details extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        assert navigationView != null;
         navigationView.setNavigationItemSelectedListener(this);
         Spinner spin = (Spinner)findViewById(R.id.spinner1);
-        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position)
-                {
-                    case 1: Toast.makeText(Faculty_Details.this,"COA",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(Faculty_Details.this,COA .class));
-                            break;
-                    case 2: Toast.makeText(Faculty_Details.this,"FLA",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(Faculty_Details.this,FLA.class));
-                            break;
-                    case 3: Toast.makeText(Faculty_Details.this,"CN",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Faculty_Details.this,CN.class));
-                            break;
-                    case 4: Toast.makeText(Faculty_Details.this,"DAA",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Faculty_Details.this,DAA.class));
-                            break;
-                    case 5: Toast.makeText(Faculty_Details.this,"SE",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Faculty_Details.this,SE.class));
-                            break;
+        if (spin != null) {
+            spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position!=0)
+                    {
+                        tName.setText(Name[position-1]);
+                        tPhone.setText(Phone[position-1]);
+                        tEmail.setText(Email[position-1]);
+                        tPhoto.setImageResource(Image[position-1]);
+                    }
+                    else
+                    {
+                        tName.setText("");
+                        tPhone.setText("");
+                        tEmail.setText("");
+                        tPhoto.setImageResource(0);
+                    }
 
-                    default: Toast.makeText(Faculty_Details.this,"Select",Toast.LENGTH_SHORT).show();
                 }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        }
 
     }
 

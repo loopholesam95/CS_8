@@ -14,11 +14,13 @@
 
     <string-array name="Details">
         <item>Select Subject</item>
-        <item> COA </item>
-        <item> FLA </item>
-        <item> CN </item>
-        <item> DAA </item>
-        <item> SE </item>
+        <item> OOSD  </item>
+        <item> CD </item>
+        <item> CG </item>
+        <item> HPCA </item>
+        <item> SE lab</item>
+        <item> CG lab </item>
+        <item> CD lab </item>
 
     </string-array>
 </resources>
