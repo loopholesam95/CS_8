@@ -1,37 +1,24 @@
 package com.example.subhadeep95.cs_8;
-
+import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Latest_details extends AppCompatActivity
+public class classRoutine extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_latest_details);
+        setContentView(R.layout.activity_class__routine);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -41,6 +28,7 @@ public class Latest_details extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -56,7 +44,7 @@ public class Latest_details extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.latest_details, menu);
+        getMenuInflater().inflate(R.menu.class__routine, menu);
         return true;
     }
 
@@ -81,26 +69,26 @@ public class Latest_details extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_facutly_details)
+       if (id == R.id.nav_facutly_details)
         {
-            startActivity(new Intent(Latest_details.this,Faculty_Details.class));
+            startActivity(new Intent(classRoutine.this,facultyDetails.class));
 
         }
         else if (id == R.id.nav_student_details)
         {
-            startActivity(new Intent(Latest_details.this,Student_details.class));
+            startActivity(new Intent(classRoutine.this,studentDetails.class));
 
         }
         else if (id == R.id.nav_notice)
         {
-
+            startActivity(new Intent(classRoutine.this,Notice.class));
         }
         else if (id == R.id.nav_latest_details)
         {
-            startActivity(new Intent(Latest_details.this,Latest_details.class));
+            startActivity(new Intent(classRoutine.this,latestDetails.class));
         }
 
-        finish();
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

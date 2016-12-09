@@ -2,11 +2,8 @@ package com.example.subhadeep95.cs_8;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,7 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Student_details extends AppCompatActivity
+public class studentDetails extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private TabLayout tabLayout;
@@ -30,15 +27,6 @@ public class Student_details extends AppCompatActivity
         setContentView(R.layout.activity_student_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager(),Titles,Numboftabs);
@@ -96,11 +84,11 @@ public class Student_details extends AppCompatActivity
 
         if (id == R.id.nav_facutly_details)
         {
-            startActivity(new Intent(Student_details.this,Faculty_Details.class));
+            startActivity(new Intent(studentDetails.this,facultyDetails.class));
         }
         else if (id == R.id.nav_student_details)
         {
-            startActivity(new Intent(Student_details.this,Student_details.class));
+            startActivity(new Intent(studentDetails.this,studentDetails.class));
         }
         else if (id == R.id.nav_notice)
         {
@@ -108,7 +96,7 @@ public class Student_details extends AppCompatActivity
         }
         else if (id == R.id.nav_latest_details)
         {
-            startActivity(new Intent(Student_details.this,Latest_details.class));
+            startActivity(new Intent(studentDetails.this,latestDetails.class));
         }
         finish();
 

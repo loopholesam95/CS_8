@@ -18,9 +18,9 @@ public class ViewPageAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if(position==0)
-            return new Slide_1();
+            return new slide1();
         else
-            return new Slide_2();
+            return new slide2();
     }
 
     @Override

@@ -5,21 +5,18 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:paddingBottom="5dp"
-    android:paddingTop="5dp"
-    android:background="#ffffff">
+    android:paddingTop="5dp">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/n_name"
-        android:text="Name"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:textColor="#00a7f5"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/n_date"
-
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:textColor="#f92a3f"/>
 
 </LinearLayout>

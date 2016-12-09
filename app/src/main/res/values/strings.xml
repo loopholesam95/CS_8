@@ -11,7 +11,7 @@
     <string name="title_activity_latest_details">Latest details</string>
     <string name="title_activity_notice">Notice</string>
 
-    <string-array name="Details">
+    <string-array name="subjectDetails">
         <item>Select Subject</item>
         <item> OOSD  </item>
         <item> CD </item>
@@ -21,4 +21,35 @@
         <item> CG LAB </item>
         <item> CD LAB </item>
     </string-array>
+
+    <string-array name="teacherName">
+        <item>Saurabh Bilgaiyan</item>
+        <item>Abhishek Ray</item>
+        <item>P.K.Panigrahi</item>
+        <item>Subhasis Dash</item>
+        <item>Arup Abhinna Acharya</item>
+        <item>P.K.Panigrahi</item>
+        <item>Abhishek Ray</item>
+    </string-array>
+
+    <string-array name="teacherEmail">
+        <item>saurabhbilgaiyan01@gmail.com</item>
+        <item>arayfcs@kiit.ac.in</item>
+        <item>prabinprakash1@gmail.com</item>
+        <item>sdasfcs@kiit.ac.in</item>
+        <item>aacharyafcs@kiit.ac.in</item>
+        <item>prabinprakash1@gmail.com</item>
+        <item>arayfcs@kiit.ac.in</item>
+    </string-array>
+
+    <string-array name="teacherPhone">
+        <item>706</item>
+        <item>7064</item>
+        <item>70642</item>
+        <item>706426</item>
+        <item>7064267</item>
+        <item>70642676</item>
+        <item>706426760</item>
+    </string-array>
+
 </resources>
