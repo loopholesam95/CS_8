@@ -14,7 +14,6 @@ public class Slide_1 extends android.support.v4.app.Fragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.main1, container, false);
-        return v;
+        return inflater.inflate(R.layout.main1, container, false);
     }
 }

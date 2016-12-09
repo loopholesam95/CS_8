@@ -7,26 +7,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-/**
- * Created by Subhadeep95 on 9/17/2016.
- package com.example.tstp.splashscreen;
-
- import android.app.Activity;
- import android.content.Intent;
- import android.os.Bundle;
- import android.view.animation.Animation;
- import android.view.animation.AnimationUtils;
- import android.widget.ImageView;
-
- /**
- * Created by filip on 2/24/2015.
- */
 public class splash extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splashh);
+        setContentView(R.layout.splash);
 
         final ImageView iv = (ImageView) findViewById(R.id.imageView);
         final Animation an = AnimationUtils.loadAnimation(getBaseContext(),R.anim.rotate);
@@ -35,7 +21,6 @@ public class splash extends Activity {
         an.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
 
             @Override
@@ -48,7 +33,6 @@ public class splash extends Activity {
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });
     }

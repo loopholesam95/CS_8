@@ -17,9 +17,12 @@
         android:layout_width="wrap_content"
         android:text="Class Routine of 5th semester"
         android:id="@+id/nav_class_routine"
-        android:textColor="#000000"
-        />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000000" />
+
     <ImageView
+        android:contentDescription="Main Routine"
         android:id="@+id/routine_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

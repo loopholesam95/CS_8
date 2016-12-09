@@ -14,7 +14,6 @@ public class Slide_2 extends Fragment
 {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View r = inflater.inflate(R.layout.main2, container, false);
-        return r;
+        return inflater.inflate(R.layout.main2, container, false);
     }
 }

@@ -2,9 +2,6 @@ package com.example.subhadeep95.cs_8;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.PopupMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,11 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Faculty_Details extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,13 +27,12 @@ public class Faculty_Details extends AppCompatActivity
                       "aacharyafcs@kiit.ac.in",
                       "prabinprakash1@gmail.com",
                       "arayfcs@kiit.ac.in"
-                        };
-    String Phone[] = {"1112","1234","5678","5467","8907","4536","5555"};
+                     };
+    String Phone[] = {"7064267601","1234","5678","5467","8907","4536","5555"};
     int Image[] = {R.drawable.saurav,R.drawable.abhi,R.drawable.prabin,R.drawable.dash,R.drawable.arup,R.drawable.prabin,R.drawable.abhi};
 
     TextView tName,tEmail,tPhone;
     ImageView tPhoto;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +45,6 @@ public class Faculty_Details extends AppCompatActivity
         tEmail = (TextView)findViewById(R.id.tEmail);
         tPhone = (TextView)findViewById(R.id.tPhone);
         tPhoto = (ImageView)findViewById(R.id.tPhoto);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -89,14 +74,12 @@ public class Faculty_Details extends AppCompatActivity
                         tEmail.setText("");
                         tPhoto.setImageResource(0);
                     }
-
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
             });
         }
-
     }
 
     @Override
