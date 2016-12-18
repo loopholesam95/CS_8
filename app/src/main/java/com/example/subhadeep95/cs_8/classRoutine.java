@@ -56,9 +56,6 @@ public class classRoutine extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -83,10 +80,11 @@ public class classRoutine extends AppCompatActivity
         {
             startActivity(new Intent(classRoutine.this,Notice.class));
         }
-        else if (id == R.id.nav_latest_details)
-        {
-            startActivity(new Intent(classRoutine.this,latestDetails.class));
-        }
+
+       else if (id == R.id.nav_tutor_mentor)
+       {
+           startActivity(new Intent(classRoutine.this,tutorMentor.class));
+       }
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

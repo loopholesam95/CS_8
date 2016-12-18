@@ -2,7 +2,6 @@ package com.example.subhadeep95.cs_8;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +22,12 @@ import java.util.List;
 public class Notice extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    ListView lvProduct;
+    List<listnotice> mProductList;
+    listViewAdapter adapter;
+
+    EditText text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,12 +35,6 @@ public class Notice extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -45,14 +45,15 @@ public class Notice extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ListView lvProduct = (ListView) findViewById(R.id.listview_notice);
+        text = (EditText)findViewById(R.id.add_notice);
+        lvProduct = (ListView) findViewById(R.id.listview_notice);
 
-        List<listnotice> mProductList = new ArrayList<>();
-        mProductList.add(new listnotice("Notice 1","22/11/16"));
-        mProductList.add(new listnotice("Notice 2","11/12/16"));
-        mProductList.add(new listnotice("Notice 3","13/12/17"));
+        mProductList = new ArrayList<>();
+        mProductList.add(new listnotice("Subhadeep","22/11/16","Notice 1"));
+        mProductList.add(new listnotice("Mayank","11/12/16","Notice 2"));
+        mProductList.add(new listnotice("Piyush","13/12/17","Notice 3"));
 
-        listViewAdapter adapter = new listViewAdapter(Notice.this, mProductList);
+        adapter = new listViewAdapter(Notice.this, mProductList);
         lvProduct.setAdapter(adapter);
 
         lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -88,9 +89,6 @@ public class Notice extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -108,18 +106,20 @@ public class Notice extends AppCompatActivity
         {
             startActivity(new Intent(Notice.this,studentDetails.class));
         }
-        else if (id == R.id.nav_notice)
+
+        else if (id == R.id.nav_tutor_mentor)
         {
-            startActivity(new Intent(Notice.this,Notice.class));
+            startActivity(new Intent(Notice.this,tutorMentor.class));
         }
-        else if (id == R.id.nav_latest_details)
-        {
-            startActivity(new Intent(Notice.this,latestDetails.class));
-        }
+
         finish();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void onClickAddNotice(View view) {
+        adapter.notifyDataSetChanged();
     }
 }

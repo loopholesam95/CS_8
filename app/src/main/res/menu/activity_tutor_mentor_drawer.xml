@@ -12,7 +12,8 @@
             android:id="@+id/nav_notice"
             android:title="Notice" />
         <item
-            android:id="@+id/nav_latest_details"
-            android:title="Latest Details" />
+            android:id="@+id/nav_tutor_mentor"
+            android:title="Tutor Mentor" />
+
     </group>
 </menu>

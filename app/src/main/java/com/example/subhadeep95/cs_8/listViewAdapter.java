@@ -28,11 +28,12 @@ public class listViewAdapter extends ArrayAdapter {
 
         TextView tvName = (TextView)v.findViewById(R.id.n_name);
         TextView tvDate = (TextView)v.findViewById(R.id.n_date);
+        TextView tvNotice = (TextView)v.findViewById(R.id.n_notice);
 
         //Set text to TextView
         tvName.setText(mProductList.get(position).getName());
         tvDate.setText(mProductList.get(position).getdate());
-
+        tvNotice.setText(mProductList.get(position).getnotice());
         return v;
     }
 

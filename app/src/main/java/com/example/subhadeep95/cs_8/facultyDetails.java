@@ -102,12 +102,6 @@ public class facultyDetails extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id== R.id.home){
-           startActivity(new Intent(facultyDetails.this,latestDetails.class));
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -117,11 +111,8 @@ public class facultyDetails extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_facutly_details)
-        {
-            startActivity(new Intent(facultyDetails.this,facultyDetails.class));
-        }
-        else if (id == R.id.nav_student_details)
+
+         if (id == R.id.nav_student_details)
         {
             startActivity(new Intent(facultyDetails.this,studentDetails.class));
         }
@@ -129,10 +120,11 @@ public class facultyDetails extends AppCompatActivity
         {
             startActivity(new Intent(facultyDetails.this,Notice.class));
         }
-        else if (id == R.id.nav_latest_details)
+        else if (id == R.id.nav_tutor_mentor)
         {
-            startActivity(new Intent(facultyDetails.this,latestDetails.class));
+            startActivity(new Intent(facultyDetails.this,tutorMentor.class));
         }
+
         finish();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

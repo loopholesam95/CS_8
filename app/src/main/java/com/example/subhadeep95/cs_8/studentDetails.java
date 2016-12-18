@@ -18,7 +18,7 @@ public class studentDetails extends AppCompatActivity
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    CharSequence Titles[]={"BTech","Dual_Degree"};
+    CharSequence Titles[]={"BTech","Dual Degree"};
     int Numboftabs =2;
 
     @Override
@@ -69,9 +69,6 @@ public class studentDetails extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -86,18 +83,15 @@ public class studentDetails extends AppCompatActivity
         {
             startActivity(new Intent(studentDetails.this,facultyDetails.class));
         }
-        else if (id == R.id.nav_student_details)
-        {
-            startActivity(new Intent(studentDetails.this,studentDetails.class));
-        }
         else if (id == R.id.nav_notice)
         {
-
+            startActivity(new Intent(studentDetails.this,Notice.class));
         }
-        else if (id == R.id.nav_latest_details)
+        else if (id == R.id.nav_tutor_mentor)
         {
-            startActivity(new Intent(studentDetails.this,latestDetails.class));
+            startActivity(new Intent(studentDetails.this,tutorMentor.class));
         }
+
         finish();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -7,8 +7,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_class__routine">Class Routine</string>
     <string name="title_activity_faculty__details">Faculty Details</string>
-    <string name="title_activity_student_details">Student details</string>
-    <string name="title_activity_latest_details">Latest details</string>
+    <string name="title_activity_student_details">Student Details</string>
+    <string name="title_activity_latest_details">Latest Details</string>
     <string name="title_activity_notice">Notice</string>
 
     <string-array name="subjectDetails">
@@ -51,5 +51,28 @@
         <item>70642676</item>
         <item>706426760</item>
     </string-array>
+    <string-array name="tutorName">
+        <item>Select Teacher</item>
+        <item> Sunneta Mohanty </item>
+        <item> Sharmista Roy </item>
+        <item> Harish Pattnaik </item>
+        <item> Ramakanth Parida </item>
+
+    </string-array>
+    <string-array name="tutorEmail">
+        <item>smohantyfcs@kiit.ac.in</item>
+        <item>sroyfcs@kiit.ac.in</item>
+        <item>hpatnaikfcs@kiit.ac.in</item>
+        <item>rparidafcs@kiit.ac.in</item>
+    </string-array>
+    <string-array name="tutorPhone">
+        <item>9438541472</item>
+        <item>9438160946</item>
+        <item>9777799567</item>
+        <item>7863561591</item>
+    </string-array>
+
+    <string name="title_activity_tutor_mentor">Tutor Mentor</string>
+    <string name="dont_have_an_account_sign_up_text">Dont have an account? <u>Sign Up</u></string>
 
 </resources>

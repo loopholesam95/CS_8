@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class splash extends Activity {
 
@@ -14,26 +15,24 @@ public class splash extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-        final ImageView iv = (ImageView) findViewById(R.id.imageView);
-        final Animation an = AnimationUtils.loadAnimation(getBaseContext(),R.anim.rotate);
-        final Animation an2 = AnimationUtils.loadAnimation(getBaseContext(),R.anim.abc_fade_out);
-        iv.startAnimation(an);
-        an.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
+       Thread timer = new Thread(){
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                iv.startAnimation(an2);
-                finish();
-                Intent i = new Intent(getBaseContext(),classRoutine.class);
-                startActivity(i);
-            }
+           public void run()
+           {
+               try
+               {
+                   sleep(1000);
+                   startActivity(new Intent(splash.this,Login.class));
+                   finish();
+               }
+               catch(InterruptedException e)
+               {
+                   e.printStackTrace();
+               }
+           }
+       };
 
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-        });
+        timer.start();
+
     }
 }

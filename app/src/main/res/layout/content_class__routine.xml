@@ -11,21 +11,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".classRoutine"
     tools:showIn="@layout/app_bar_class__routine">
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Class Routine of 5th semester"
-        android:id="@+id/nav_class_routine"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_centerHorizontal="true"
-        android:textColor="#000000" />
-
-    <ImageView
+<ImageView
         android:contentDescription="Main Routine"
         android:id="@+id/routine_image_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/cs8_routine" />
-
+        android:src="@drawable/rouine" />
 </RelativeLayout>

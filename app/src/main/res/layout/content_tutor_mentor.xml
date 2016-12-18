@@ -9,23 +9,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".facultyDetails"
-    tools:showIn="@layout/app_bar_faculty__details">
+    tools:context="com.example.subhadeep95.cs_8.tutorMentor"
+    tools:showIn="@layout/app_bar_tutor_mentor">
+
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinner2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/subjectDetails"
-        android:layout_marginTop="16dp"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"/>
+        android:entries="@array/tutorName"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Please select from the menu"
-        android:id="@+id/textView2"
+        android:id="@+id/textView3"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"/>
 
@@ -33,38 +34,40 @@
         android:contentDescription="Teacher's Image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/tPhoto"
+        android:id="@+id/tmPhoto"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/spinner1" />
+        android:layout_below="@+id/spinner2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tName"
+        android:id="@+id/tmName"
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/tPhoto" />
+        android:layout_below="@+id/tmPhoto" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/tPhone"
+        android:id="@+id/tmPhone"
         android:autoLink="phone"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:layout_below="@+id/tName" />
+        android:layout_below="@+id/tmName" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/tEmail"
+        android:id="@+id/tmEmail"
         android:autoLink="email"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:layout_below="@+id/tPhone" />
+        android:layout_below="@+id/tmPhone" />
+
+
 
 </RelativeLayout>
