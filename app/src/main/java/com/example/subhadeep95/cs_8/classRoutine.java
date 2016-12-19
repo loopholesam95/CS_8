@@ -1,4 +1,5 @@
 package com.example.subhadeep95.cs_8;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +8,23 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 
 public class classRoutine extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +32,8 @@ public class classRoutine extends AppCompatActivity
         setContentView(R.layout.activity_class__routine);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        FirebaseMessaging.getInstance().subscribeToTopic("CS8");
+        mAuth = FirebaseAuth.getInstance();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -29,7 +44,27 @@ public class classRoutine extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Toast.makeText(classRoutine.this,"Welcome to CS8 "+loadData(),Toast.LENGTH_SHORT).show();
+
     }
+
+    protected String loadData() {
+        String FILENAME = "name.txt";
+        String out = "";
+
+        try {
+            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
+            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
+            String sLine1;
+            while (((sLine1 = br1.readLine()) != null)) {
+                out += sLine1;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return out;
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -55,9 +90,29 @@ public class classRoutine extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id == R.id.logout)
+        {
+            mAuth.signOut();
+            savedata("");
+            startActivity(new Intent(this, Login.class));
+            finish();
+            return true;
+        }
+
         //noinspection SimplifiableIfStatement
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void savedata(String name)
+    {
+        String FILENAME = "name.txt";
+        try {
+            FileOutputStream fos = getApplication().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(name.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

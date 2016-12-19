@@ -1,7 +1,14 @@
 package com.example.subhadeep95.cs_8;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,22 +18,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Notice extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ListView lvProduct;
-    List<listnotice> mProductList;
-    listViewAdapter adapter;
 
-    EditText text;
+    ListView listView;
+
+    private List<listnotice> mProductList;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +55,7 @@ public class Notice extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mAuth = FirebaseAuth.getInstance();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -42,26 +63,73 @@ public class Notice extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Notice.this,AddNotice.class));
+            }
+        });
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        text = (EditText)findViewById(R.id.add_notice);
-        lvProduct = (ListView) findViewById(R.id.listview_notice);
+        listView = (ListView)findViewById(R.id.listview_notice);
 
         mProductList = new ArrayList<>();
-        mProductList.add(new listnotice("Subhadeep","22/11/16","Notice 1"));
-        mProductList.add(new listnotice("Mayank","11/12/16","Notice 2"));
-        mProductList.add(new listnotice("Piyush","13/12/17","Notice 3"));
 
-        adapter = new listViewAdapter(Notice.this, mProductList);
-        lvProduct.setAdapter(adapter);
+        if (isNetworkAvailable()) {
+            setNotice();
+        } else {
+            Toast.makeText(Notice.this, "Internet Not Connected", Toast.LENGTH_SHORT).show();
+        }
 
-        lvProduct.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+    }
+
+    public void setNotice()
+    {
+        final ProgressDialog progressDialog = ProgressDialog.show(Notice.this,"Fetching  Messages...","Please wait",false,false);
+
+        String url = "https://cs-8-cc5a1.firebaseio.com/Notice/";
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
+        ref.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "You clicked on position "+(position+1), Toast.LENGTH_SHORT).show();
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                progressDialog.dismiss();
+                mProductList.clear();
+                String name[] = new String[(int)dataSnapshot.getChildrenCount()];
+                String date[] = new String[(int)dataSnapshot.getChildrenCount()];
+                String message[] = new String[(int)dataSnapshot.getChildrenCount()];
+                int i=0;
+
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    listnotice notice_structure = snapshot.getValue(listnotice.class);
+                    name[i] = notice_structure.getName();
+                    date[i] = notice_structure.getdate();
+                    message[i] = notice_structure.getnotice();
+                    mProductList.add(new listnotice(name[i],date[i],message[i]));
+                    i++;
+                }
+
+                listViewAdapter notice = new listViewAdapter(Notice.this,mProductList);
+                listView.setAdapter(notice);
+                listView.setSelection(notice.getCount()-1);
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressDialog.dismiss();
             }
         });
+    }
+
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        // if no network is available networkInfo will be null
+        // otherwise check if we are connected
+        return networkInfo != null && networkInfo.isConnected();
     }
 
     @Override
@@ -88,14 +156,34 @@ public class Notice extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id == R.id.logout)
+        {
+            mAuth.signOut();
+            savedata("");
+            startActivity(new Intent(this,Login.class));
+            finish();
+            return true;
+        }
+
         //noinspection SimplifiableIfStatement
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void savedata(String name)
+    {
+        String FILENAME = "name.txt";
+        try {
+            FileOutputStream fos = getApplication().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(name.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_facutly_details)
@@ -119,7 +207,21 @@ public class Notice extends AppCompatActivity
         return true;
     }
 
-    public void onClickAddNotice(View view) {
-        adapter.notifyDataSetChanged();
+    protected String loadData() {
+        String FILENAME = "name.txt";
+        String out = "";
+
+        try {
+            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
+            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
+            String sLine1;
+            while (((sLine1 = br1.readLine()) != null)) {
+                out += sLine1;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return out;
     }
+
 }

@@ -5,6 +5,9 @@ public class listnotice
 
     private String name,date,notice;
 
+    public listnotice() {
+    }
+
     public listnotice(String name, String date, String notice) {
         this.name = name;
         this.date = date;

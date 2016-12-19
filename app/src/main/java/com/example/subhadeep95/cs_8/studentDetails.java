@@ -1,5 +1,6 @@
 package com.example.subhadeep95.cs_8;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -13,6 +14,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.FileOutputStream;
+
 public class studentDetails extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -21,12 +26,16 @@ public class studentDetails extends AppCompatActivity
     CharSequence Titles[]={"BTech","Dual Degree"};
     int Numboftabs =2;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         ViewPageAdapter adapter = new ViewPageAdapter(getSupportFragmentManager(),Titles,Numboftabs);
@@ -70,8 +79,29 @@ public class studentDetails extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
 
+        if(id == R.id.logout)
+        {
+            mAuth.signOut();
+            savedata("");
+            startActivity(new Intent(this,Login.class));
+            finish();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+    public void savedata(String name)
+    {
+        String FILENAME = "name.txt";
+        try {
+            FileOutputStream fos = getApplication().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(name.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

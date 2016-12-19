@@ -1,9 +1,9 @@
 package com.example.subhadeep95.cs_8;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.FileOutputStream;
+
 public class tutorMentor extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -26,12 +30,17 @@ public class tutorMentor extends AppCompatActivity
     ImageView tmPhoto;
     int Image[] ={R.drawable.smoh,R.drawable.sray,R.drawable.hpatt,R.drawable.rnramakant};
     private String Name[],Email[],Phone[];
+
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutor_mentor);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
 
         Name = getResources().getStringArray(R.array.tutorName);
         Email = getResources().getStringArray(R.array.tutorEmail);
@@ -100,14 +109,34 @@ public class tutorMentor extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id==R.id.logout)
+        {
+            mAuth.signOut();
+            savedata("");
+            startActivity(new Intent(this,tutorMentor.class));
+            finish();
+            return true;
+        }
+
         //noinspection SimplifiableIfStatement
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void savedata(String name)
+    {
+        String FILENAME = "name.txt";
+        try {
+            FileOutputStream fos = getApplication().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(name.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_facutly_details)
         {

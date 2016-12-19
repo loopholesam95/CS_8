@@ -1,5 +1,7 @@
 package com.example.subhadeep95.cs_8;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +14,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.FileOutputStream;
 
 public class SignUp extends AppCompatActivity {
 
@@ -24,6 +30,8 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
         mAuth = FirebaseAuth.getInstance();
 
         nameText = (EditText)findViewById(R.id.name);
@@ -35,24 +43,25 @@ public class SignUp extends AppCompatActivity {
 
     public void onClickSignUp(View view)
     {
-        String name = nameText.getText().toString();
-        String phone = phoneText.getText().toString();
-        String email = emailText.getText().toString();
-        String pass = passText.getText().toString();
+        final String name = nameText.getText().toString();
+        final String phone = phoneText.getText().toString();
+        final String email = emailText.getText().toString();
+        final String pass = passText.getText().toString();
         String repass = repassText.getText().toString();
-        if(!validateForm(email,pass,repass)) {
-            return;
-        }
-        else
-        {
+        if(validateForm(email,pass,repass)) {
+            final ProgressDialog progressDialog = ProgressDialog.show(SignUp.this,"Signing Up...","Please Wait",false,false);
+
             mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    progressDialog.dismiss();
                     if (!task.isSuccessful()) {
                         Toast.makeText(SignUp.this, "You are either already registered or your internet is slow.", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(SignUp.this,"Welcome to CS8",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUp.this,"SignUp completed",Toast.LENGTH_SHORT).show();
+                        sendData(name,phone,email,pass);
+                        savedata(name);
                         startActivity(new Intent(SignUp.this,Login.class));
                     }
                 }
@@ -79,4 +88,31 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
+    public void sendData(String name,String phone,String email,String pass)
+    {
+        String url = "https://cs-8-cc5a1.firebaseio.com/User/";
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
+        User_Structure user_structure = new User_Structure();
+        user_structure.setName(name);
+        user_structure.setPhone(phone);
+        user_structure.setEmail(email);
+        user_structure.setPass(pass);
+        reference.push().setValue(user_structure);
+    }
+
+    public void savedata(String name)
+    {
+        String FILENAME = "name.txt";
+        try {
+            FileOutputStream fos = getApplication().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(name.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void onCLickSignIn(View view) {
+        startActivity(new Intent(SignUp.this,Login.class));
+        finish();
+    }
 }

@@ -1,7 +1,9 @@
 package com.example.subhadeep95.cs_8;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.FileOutputStream;
+
 public class facultyDetails extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -26,12 +32,16 @@ public class facultyDetails extends AppCompatActivity
     TextView tName,tEmail,tPhone;
     ImageView tPhoto;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculty__details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
 
         Name = getResources().getStringArray(R.array.teacherName);
         Email = getResources().getStringArray(R.array.teacherEmail);
@@ -101,14 +111,34 @@ public class facultyDetails extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if(id==R.id.logout)
+        {
+            mAuth.signOut();
+            savedata("");
+            startActivity(new Intent(this, Login.class));
+            finish();
+            return true;
+        }
+
         //noinspection SimplifiableIfStatement
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void savedata(String name)
+    {
+        String FILENAME = "name.txt";
+        try {
+            FileOutputStream fos = getApplication().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos.write(name.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 

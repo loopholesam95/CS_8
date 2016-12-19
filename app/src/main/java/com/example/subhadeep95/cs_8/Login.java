@@ -126,6 +126,8 @@ public class Login extends AppCompatActivity {
 
     public void fetchName(final String email, final String pass)
     {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://cs-8-cc5a1.firebaseio.com/SAM");
+        ref.setValue("Hey");
         String url = "https://cs-8-cc5a1.firebaseio.com/User/";
         DatabaseReference reference = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {

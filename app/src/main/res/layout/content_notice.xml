@@ -23,24 +23,7 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
-          <EditText
-              android:layout_width="200dp"
-              android:layout_height="match_parent"
-              android:hint="Add a Notice..."
-              android:id="@+id/add_notice"
-              android:maxWidth="70dp"
-              android:layout_toLeftOf="@+id/send"
-              android:layout_alignParentLeft="true"
-              android:layout_alignParentStart="true" />
 
-        <Button
-            android:text="Send"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/send"
-            android:onClick="onClickAddNotice"/>
 
     </RelativeLayout>
 
