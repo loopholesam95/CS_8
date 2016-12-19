@@ -10,4 +10,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.subhadeep95.cs_8.AddNotice">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageNotice" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageNotice"
+        android:id="@+id/textNotice"
+        android:hint="Enter Notice Title..."
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textNotice"
+        android:layout_centerHorizontal="true"
+        android:text="Upload"
+        android:layout_marginTop="16dp"/>
+
 </RelativeLayout>
