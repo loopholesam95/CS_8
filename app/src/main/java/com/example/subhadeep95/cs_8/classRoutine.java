@@ -1,5 +1,7 @@
 package com.example.subhadeep95.cs_8;
 import android.content.Context;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +10,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -24,7 +25,12 @@ import java.io.InputStreamReader;
 public class classRoutine extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private FirebaseAuth mAuth;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    CharSequence Titles[]={"Daily Routine","Full Routine"};
+    int Numboftabs =2;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +38,16 @@ public class classRoutine extends AppCompatActivity
         setContentView(R.layout.activity_class__routine);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FirebaseMessaging.getInstance().subscribeToTopic("CS8");
         mAuth = FirebaseAuth.getInstance();
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager2);
+        ViewPageAdapter2 adapter = new ViewPageAdapter2(getSupportFragmentManager(),Titles,Numboftabs);
+        viewPager.setAdapter(adapter);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -13,26 +13,9 @@ public class splash extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash);
 
-       Thread timer = new Thread(){
-
-           public void run()
-           {
-               try
-               {
-                   sleep(1000);
-                   startActivity(new Intent(splash.this,Login.class));
-                   finish();
-               }
-               catch(InterruptedException e)
-               {
-                   e.printStackTrace();
-               }
-           }
-       };
-
-        timer.start();
+        startActivity(new Intent(splash.this,Login.class));
+        finish();
 
     }
 }

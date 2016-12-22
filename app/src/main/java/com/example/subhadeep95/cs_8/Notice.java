@@ -8,7 +8,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,13 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class Notice extends AppCompatActivity
@@ -90,7 +84,7 @@ public class Notice extends AppCompatActivity
     {
         final ProgressDialog progressDialog = ProgressDialog.show(Notice.this,"Fetching  Messages...","Please wait",false,false);
 
-        String url = "https://cs-8-cc5a1.firebaseio.com/Notice/";
+        final String url = "https://cs-8-cc5a1.firebaseio.com/Notice/";
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -100,6 +94,7 @@ public class Notice extends AppCompatActivity
                 String name[] = new String[(int)dataSnapshot.getChildrenCount()];
                 String date[] = new String[(int)dataSnapshot.getChildrenCount()];
                 String message[] = new String[(int)dataSnapshot.getChildrenCount()];
+                final String url[] = new String[(int)dataSnapshot.getChildrenCount()];
                 int i=0;
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
@@ -107,13 +102,30 @@ public class Notice extends AppCompatActivity
                     name[i] = notice_structure.getName();
                     date[i] = notice_structure.getdate();
                     message[i] = notice_structure.getnotice();
-                    mProductList.add(new listnotice(name[i],date[i],message[i]));
+                    url[i] = notice_structure.getUrl();
+                    mProductList.add(new listnotice(name[i],date[i],message[i],url[i]));
                     i++;
                 }
 
                 listViewAdapter notice = new listViewAdapter(Notice.this,mProductList);
                 listView.setAdapter(notice);
                 listView.setSelection(notice.getCount()-1);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        if(url[i].equals(""))
+                        {
+                            Toast.makeText(Notice.this,"No image content",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(Notice.this,"Wait while fetching image vontent",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(Notice.this,imageNoticeShow.class);
+                            intent.putExtra("URL",url[i]);
+                            startActivity(intent);
+                        }
+                    }
+                });
 
             }
             @Override
@@ -206,22 +218,4 @@ public class Notice extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    protected String loadData() {
-        String FILENAME = "name.txt";
-        String out = "";
-
-        try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return out;
-    }
-
 }

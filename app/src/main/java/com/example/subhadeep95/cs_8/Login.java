@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.BufferedReader;
@@ -45,10 +46,6 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(Login.this,classRoutine.class));
             finish();
         }
-        else
-        {
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        }
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -56,7 +53,7 @@ public class Login extends AppCompatActivity {
 
     public void signin(View view)
     {
-        final String email = emailText.getText().toString();
+        final String email = emailText.getText().toString().toLowerCase();
         final String pass = passText.getText().toString();
 
         if(validateForm(email,pass))
@@ -71,10 +68,7 @@ public class Login extends AppCompatActivity {
                         Toast.makeText(Login.this, "You are have either not registered or your internet is slow.", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(Login.this,"Welcome to CS8",Toast.LENGTH_SHORT).show();
                         fetchName(email,pass);
-                        startActivity(new Intent(Login.this,classRoutine.class));
-                        finish();
                     }
                 }
             });
@@ -126,26 +120,28 @@ public class Login extends AppCompatActivity {
 
     public void fetchName(final String email, final String pass)
     {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl("https://cs-8-cc5a1.firebaseio.com/SAM");
-        ref.setValue("Hey");
         String url = "https://cs-8-cc5a1.firebaseio.com/User/";
         DatabaseReference reference = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        Query query = reference.orderByChild("name");
+        query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot: dataSnapshot.getChildren())
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     User_Structure user_structure = snapshot.getValue(User_Structure.class);
-                    if(user_structure.getEmail().equalsIgnoreCase(email) && user_structure.getPass().equalsIgnoreCase(pass)) {
-                        name = user_structure.getName();
+                    if(user_structure.getEmail().equalsIgnoreCase(email) && user_structure.getPass().equals(pass))
+                    {
+                        savedata(user_structure.getName());
                     }
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
             }
         });
-        savedata(name);
     }
 
     public void savedata(String name)
@@ -154,6 +150,8 @@ public class Login extends AppCompatActivity {
         try {
             FileOutputStream fos = getApplication().openFileOutput(FILENAME, Context.MODE_PRIVATE);
             fos.write(name.getBytes());
+            startActivity(new Intent(Login.this,classRoutine.class));
+            finish();
         } catch (Exception e) {
             e.printStackTrace();
         }

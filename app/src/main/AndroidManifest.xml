@@ -37,10 +37,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".splash"
-            android:hardwareAccelerated="false">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -70,7 +69,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".AddNotice"/>
+        <activity android:name=".AddNotice"
+            android:label="Add Notice"/>
+        <activity android:name=".imageNoticeShow"
+           />
     </application>
 
 </manifest>

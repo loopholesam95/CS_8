@@ -43,13 +43,13 @@
     </string-array>
 
     <string-array name="teacherPhone">
-        <item>706</item>
-        <item>7064</item>
-        <item>70642</item>
-        <item>706426</item>
-        <item>7064267</item>
-        <item>70642676</item>
-        <item>706426760</item>
+        <item>9040236696</item>
+        <item>9437280008</item>
+        <item>9692978283</item>
+        <item>9437800206</item>
+        <item>9861058079</item>
+        <item>9692978283</item>
+        <item>9437280008</item>
     </string-array>
     <string-array name="tutorName">
         <item>Select Teacher</item>
@@ -74,6 +74,9 @@
 
     <string name="title_activity_tutor_mentor">Tutor Mentor</string>
     <string name="dont_have_an_account_sign_up_text">Dont have an account? <u>Sign Up</u></string>
+    <string name="imagenotice_content_desciption">ImageNotice</string>
+    <string name="image_notice_see">Image Notice See</string>
+    <string name="daily_routine_content_description">Daily Routine</string>
 
 
 </resources>

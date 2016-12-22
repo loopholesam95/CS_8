@@ -70,7 +70,7 @@ public class tutorMentor extends AppCompatActivity
                         tmEmail.setText(Email[position - 1]);
                         tmPhoto.setImageResource(Image[position - 1]);
                     } else {
-                        Toast.makeText(tutorMentor.this, "Please select the subject", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(tutorMentor.this, "Please select your tutor mentor", Toast.LENGTH_SHORT).show();
                         tmName.setText("");
                         tmPhone.setText("");
                         tmEmail.setText("");
@@ -141,16 +141,18 @@ public class tutorMentor extends AppCompatActivity
         if (id == R.id.nav_facutly_details)
         {
             startActivity(new Intent(tutorMentor.this,facultyDetails.class));
+            finish();
         }
         else if (id == R.id.nav_student_details)
         {
             startActivity(new Intent(tutorMentor.this,studentDetails.class));
+            finish();
         }
         else if (id == R.id.nav_notice)
         {
             startActivity(new Intent(tutorMentor.this,Notice.class));
+            finish();
         }
-        finish();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

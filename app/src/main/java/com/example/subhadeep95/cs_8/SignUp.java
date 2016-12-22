@@ -30,8 +30,6 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
 
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
         mAuth = FirebaseAuth.getInstance();
 
         nameText = (EditText)findViewById(R.id.name);
@@ -45,7 +43,7 @@ public class SignUp extends AppCompatActivity {
     {
         final String name = nameText.getText().toString();
         final String phone = phoneText.getText().toString();
-        final String email = emailText.getText().toString();
+        final String email = emailText.getText().toString().toLowerCase();
         final String pass = passText.getText().toString();
         String repass = repassText.getText().toString();
         if(validateForm(email,pass,repass)) {

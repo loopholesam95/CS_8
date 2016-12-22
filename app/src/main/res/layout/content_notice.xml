@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.subhadeep95.cs_8.Notice"
-    tools:showIn="@layout/app_bar_notice">
+    tools:showIn="@layout/app_bar_notice"
+    android:background="@drawable/backapp2"
+   >
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listview_notice"
-        android:dividerHeight="5dp"
+        android:dividerHeight="2dp"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/LL"/>
 
