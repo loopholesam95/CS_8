@@ -46,7 +46,7 @@ public class SignUp extends AppCompatActivity {
         final String email = emailText.getText().toString().toLowerCase();
         final String pass = passText.getText().toString();
         String repass = repassText.getText().toString();
-        if(validateForm(email,pass,repass)) {
+        if(validateForm(email,pass,repass,phone)) {
             final ProgressDialog progressDialog = ProgressDialog.show(SignUp.this,"Signing Up...","Please Wait",false,false);
 
             mAuth.createUserWithEmailAndPassword(email,pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -67,22 +67,29 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-    public boolean validateForm(String email,String pass, String repass)
+    public boolean validateForm(String email,String pass, String repass, String phone)
     {
-        if(email.startsWith("14") && email.endsWith("@kiit.ac.in") && pass.length()>7 && pass.equals(repass)) {
-            return true;
-        }
-        else if(email.startsWith("14") && email.endsWith("@kiit.ac.in")  && pass.length()>7) {
-            Toast.makeText(SignUp.this,"Password and repassword is not same",Toast.LENGTH_SHORT).show();
+        if(phone.length()!= 10) {
+            Toast.makeText(SignUp.this,"Invalid Phone number",Toast.LENGTH_SHORT).show();
             return false;
         }
-        else if(email.startsWith("14") && email.endsWith("@kiit.ac.in") && pass.equals(repass)) {
-            Toast.makeText(SignUp.this,"Please enter a password of mimimum 8 characters",Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else {
+        else if(!email.startsWith("14") && !email.endsWith("@kiit.ac.in"))
+        {
             Toast.makeText(SignUp.this,"Please type a valid email address",Toast.LENGTH_SHORT).show();
             return false;
+        }
+        else if(pass.length()<8) {
+            Toast.makeText(SignUp.this,"Please enter a password of mimimum 8 characters ",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        else if(!pass.equals(repass)) {
+            Toast.makeText(SignUp.this,"Password and repassword is not same ",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 

@@ -96,10 +96,6 @@ public class Login extends AppCompatActivity {
         finish();
     }
 
-    public void forgot(View view)
-    {
-        //startActivity(new Intent(Login.this,.class));
-    }
 
     protected String loadData() {
         String FILENAME = "name.txt";

@@ -46,18 +46,6 @@
         android:onClick="signin"/>
 
     <Button
-        android:text="Forgot Your Password"
-        android:textColor="#000000"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/forgot"
-        android:background="#00000000"
-        android:layout_marginBottom="66dp"
-        android:layout_below="@+id/signin"
-        android:layout_centerHorizontal="true"
-        android:onClick="forgot"/>
-
-    <Button
         android:text="@string/dont_have_an_account_sign_up_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

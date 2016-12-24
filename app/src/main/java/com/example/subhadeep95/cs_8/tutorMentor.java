@@ -113,7 +113,7 @@ public class tutorMentor extends AppCompatActivity
         {
             mAuth.signOut();
             savedata("");
-            startActivity(new Intent(this,tutorMentor.class));
+            startActivity(new Intent(this,Login.class));
             finish();
             return true;
         }

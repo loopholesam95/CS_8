@@ -9,18 +9,29 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:background="#ddd">
+    >
 
         <ImageView
             android:contentDescription="@string/daily_routine_content_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/ttimage"
-            android:src="@drawable/sunday"
+            android:src="@drawable/sun"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:scaleType="fitXY"
             android:adjustViewBounds="true"/>
 
-    </RelativeLayout>
+    <TextView
+        android:text="SUNDAY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/ttimage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="33dp"
+        android:textColor="#000000"
+        android:textSize="25dp"
+        android:id="@+id/day" />
+
+</RelativeLayout>
 
